@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 3
   tags:
   - Basket
+  - Ground
+  - Enemy
+  - Life
+  - Food1
+  - Food2
+  - Food3
+  - Food4
+  - Food5
   layers:
   - Default
   - TransparentFX
