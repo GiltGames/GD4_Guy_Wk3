@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 8321569668593402006}
   - component: {fileID: 8173149428376956027}
   m_Layer: 0
-  m_Name: Proj_Ban
-  m_TagString: Food1
+  m_Name: 'Food[0]'
+  m_TagString: Food0
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4273786082598338513}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

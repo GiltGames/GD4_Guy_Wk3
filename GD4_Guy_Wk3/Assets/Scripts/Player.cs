@@ -1,5 +1,7 @@
 using JetBrains.Annotations;
 using TreeEditor;
+using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
@@ -27,12 +29,22 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
 
     // Baskets
-    public Vector3 vBPos1;
-    public Vector3 vBPos2;
-    public Vector3 vBPos3;
-    public Vector3 vBPos4;
-    public Vector3 vBPos5;
+    public GameObject[] vBasket;
+    public Vector3[] vBPos;
+    public Vector3[] vDir;
+    public float[] vDis;
+    public float vDiff;
+    public Vector3 vPlayDir;
 
+    public float vPickupAngle= 0.2f;
+
+    public int close;
+
+
+    public GameObject vCam1;
+    public GameObject vCam2;
+    public bool vCam1on;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -61,7 +73,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         { vMove = Vector3.zero; }
         */
 
-        transform.Translate(vMove);
+        transform.position = transform.position +  vMove;
 
         if (vMove.sqrMagnitude < .1)
         { vMove = Vector3.zero; }
@@ -93,28 +105,76 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         //Check for basket in front and close
 
-        /*
-        for (int i=1 ; i <= 5;i++)
+       //Detect basket distance and direction
+
+        for (int i=0;i<5;i++)
         {
-
-           
-
-
+            vBPos[i] = vBasket[i].transform.position - transform.position ;
+            vBPos[i] = new Vector3(vBPos[i].x, 0, vBPos[i].z);
+            vDir[i] = vBPos[i].normalized;
+            vDis[i] = vBPos[i].magnitude;
         }
-        */
 
-        Vector3 vB1 = transform.position - vBPos1;
-        Vector3 vB2 = transform.position - vBPos2;
-        Vector3 vB3 = transform.position - vBPos3;
-        Vector3 vB4 = transform.position - vBPos4;
-        Vector3 vB5 = transform.position - vBPos5;
+        //Detect closest
 
-        //Detect in view
+         close = 0;
+        vPlayDir = new Vector3(transform.forward.x,0,transform.forward.z);
+        vPlayDir = vPlayDir.normalized;
 
-       
+        for (int i = 0; i < 5; i++)
+        {
+            if (vDis[i] < vDis[close])
 
-        // Spawn Projectile
-        vThrowStartPos = vThrowStart.transform.position;
+            {
+                close = i;
+            }
+        }
+            //Highlight closest
+
+        for (int i = 0; i < 5; i++)
+
+        { 
+            if (i == close)
+         
+            { 
+                Transform vChild = vBasket[i].transform.Find("OutlineBasket");
+                GameObject vChildObj = vChild.gameObject;
+                vChildObj.SetActive(true);
+
+                vDiff = Vector3.Angle(vDir[close],vPlayDir);
+
+                if (vDiff < vPickupAngle)
+                {
+                    vChildObj.SetActive(true);
+                }
+
+                else
+                {
+
+                    vChildObj.SetActive(false);
+
+                }
+
+            }
+            
+            else
+            {
+                Transform vChild = vBasket[i].transform.Find("OutlineBasket");
+                GameObject vChildObj = vChild.gameObject;
+                vChildObj.SetActive(false);
+
+            }
+        
+        }
+        
+
+
+            //Detect in view
+
+
+
+            // Spawn Projectile
+            vThrowStartPos = vThrowStart.transform.position;
 
 
         
@@ -127,6 +187,29 @@ public class NewMonoBehaviourScript : MonoBehaviour
             Instantiate(vProjectileHighlight, vThrowStartPos, Quaternion.identity, vparent);
            
         }
+
+
+
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            if(vCam1on)
+            {
+                vCam1on = false;
+                vCam1.SetActive(false);
+                vCam2.SetActive(true);
+
+            }
+            else
+            {
+                vCam1on = true;
+                vCam2.SetActive(false);
+                vCam1.SetActive(true);
+
+
+            }
+
+        }
+
 
      /*   if(Input.GetButton("Fire1"))
         {

@@ -9,6 +9,7 @@ public class Launch : MonoBehaviour
     public float vThrowForceInc = 1;
     public float vThrowForceLim = 100;
     public Vector3 vThrowAngle;
+   // public GameObject vThrownParent;
 
 
 
@@ -47,7 +48,7 @@ rb.isKinematic = false;
 
                 rb.AddForce(vThrowAngle * vThrowForce);
 
-
+                transform.SetParent(null);
 
 
             }

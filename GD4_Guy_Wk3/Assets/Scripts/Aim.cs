@@ -27,7 +27,7 @@ public class Aim : MonoBehaviour
         vCamEuler = transform.eulerAngles;
 
         transform.Rotate(0, vMouseX * vMouseSpeed * Time.deltaTime, 0);
-        transform.Rotate(vMouseY * vMouseSpeed * Time.deltaTime, 0,0);
+        transform.Rotate(-vMouseY * vMouseSpeed * Time.deltaTime, 0,0);
 
 
         if ((transform.eulerAngles.z > vEulerTol && transform.eulerAngles.z < 180) || (transform.eulerAngles.z < (360 - vEulerTol) && transform.eulerAngles.z > 180))
