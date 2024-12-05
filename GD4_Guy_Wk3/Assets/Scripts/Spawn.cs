@@ -52,6 +52,7 @@ public class Spawn : MonoBehaviour
 
             Debug.Log(vFoodNames[vIndex]);
             script.vFoodName = vFoodNames[vIndex];
+            
 
 
            

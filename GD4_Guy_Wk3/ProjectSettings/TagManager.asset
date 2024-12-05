@@ -15,6 +15,7 @@ TagManager:
   - Food5
   - Food0
   - Score
+  - Torus
   layers:
   - Default
   - TransparentFX
