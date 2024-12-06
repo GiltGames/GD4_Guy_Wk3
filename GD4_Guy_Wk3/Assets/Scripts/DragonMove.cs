@@ -122,26 +122,31 @@ public class DragonMove : MonoBehaviour
         }
 
 
-        if(other.tag == "Finish")
+        if (other.tag == "Finish")
         {
             Debug.Log("Hit Shield");
 
             fFed = true;
             ScoreKeep = GameObject.Find("ScoreKeeper").GetComponent<ScoreKeep>();
 
-           
-            vMesh.enabled = true;
+
+
             vShieldOnTimer = vShieldOnTime;
 
-            ScoreKeep.vLives = ScoreKeep.vLives - 1;
 
-            if(ScoreKeep.vLives == 0)
+
+            if (ScoreKeep.vLives < 1)
 
             {
                 fGameEnd();
 
             }
+            else { 
+            ScoreKeep.vLives = ScoreKeep.vLives - 1;
 
+            vMesh.enabled = true;
+
+             }
         }
 
     }

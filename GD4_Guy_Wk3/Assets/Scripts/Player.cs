@@ -8,8 +8,8 @@ using UnityEngine.UIElements;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-   float vPlayerMoveSpeed = 15;
-   float vPlayerMoveLimit = 20;
+    float vPlayerMoveSpeed = 15;
+    float vPlayerMoveLimit = 20;
     public float vPlayerMoveLimitZ = 15;
     public GameObject vProjectile;
     public GameObject vProjectileHighlight;
@@ -18,14 +18,20 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public GameObject vThrowStart;
     public Vector3 vThrowStartPos;
     public float vThrowPower;
-    public float vThrowPowerInc=0.6f;
+    public float vThrowPowerInc = 0.6f;
     public float vThrowSpeedLimit = 100;
     public Rigidbody rb;
     public Transform vparent;
 
-   Vector3 vMove;
+    Vector3 vMove;
 
     public Vector3 vOffset;
+
+
+    //Food
+    public GameObject[] FoodSelect;
+    public int vPickup;
+    public GameObject[] HighlightSelect;
 
 
     // Baskets
@@ -50,6 +56,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void Start()
     {
        vOffset = transform.position;
+        transform.rotation = Quaternion.identity;
         
     }
 
@@ -146,13 +153,14 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 if (vDiff < vPickupAngle)
                 {
                     vChildObj.SetActive(true);
+                    vPickup = close;
                 }
 
                 else
                 {
 
                     vChildObj.SetActive(false);
-
+                    vPickup = 6;
                 }
 
             }
@@ -178,12 +186,16 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
 
         
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && vPickup<6)
            
         {
             Debug.Log("Start: " + vThrowStartPos);
-           
+
+            vProjectile = FoodSelect[vPickup];
+            vProjectileHighlight = HighlightSelect[vPickup];
+
            Instantiate(vProjectile, vThrowStartPos, vparent.rotation,vparent);
+
             Instantiate(vProjectileHighlight, vThrowStartPos, Quaternion.identity, vparent);
            
         }

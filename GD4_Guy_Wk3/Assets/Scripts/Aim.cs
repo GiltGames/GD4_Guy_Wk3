@@ -14,7 +14,7 @@ public class Aim : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        transform.eulerAngles = new Vector3(01, 1, 0);
+        
     }
 
     // Update is called once per frame

@@ -14,7 +14,7 @@ public class Spawn : MonoBehaviour
     public float vSpawnAccel = 0.95f;
     public Vector3 vSpawnLoc;
     public Transform vTarget;
-    public int vNoofFood = 2;
+    public int vNoofFood = 5   ;
     public string vFoodNeeded;
     
     public string[] vFoodNames;
