@@ -16,6 +16,8 @@ TagManager:
   - Food0
   - Score
   - Torus
+  - Dog
+  - Level
   layers:
   - Default
   - TransparentFX

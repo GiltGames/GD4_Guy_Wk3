@@ -1,15 +1,16 @@
 using JetBrains.Annotations;
-using TreeEditor;
+
 using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-    float vPlayerMoveSpeed = 15;
-    float vPlayerMoveLimit = 20;
+    public float vPlayerMoveSpeed = 15;
+    public float vPlayerMoveLimit = 20;
     public float vPlayerMoveLimitZ = 15;
     public GameObject vProjectile;
     public GameObject vProjectileHighlight;
@@ -26,7 +27,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
     Vector3 vMove;
 
     public Vector3 vOffset;
-
+    public Spawn Spawn;
+    public int vNooBasket;
 
     //Food
     public GameObject[] FoodSelect;
@@ -57,13 +59,17 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
        vOffset = transform.position;
         transform.rotation = Quaternion.identity;
-        
+        vNooBasket = Spawn.vNoofFood;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-         //Get input
+        //Get input
+
+        
+        
         float vPlayerInput = Input.GetAxis("Horizontal");
         float vPlayerInputZ = Input.GetAxis("Vertical");
         
@@ -114,7 +120,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
        //Detect basket distance and direction
 
-        for (int i=0;i<5;i++)
+        for (int i=0;i<vNooBasket;i++)
         {
             vBPos[i] = vBasket[i].transform.position - transform.position ;
             vBPos[i] = new Vector3(vBPos[i].x, 0, vBPos[i].z);
@@ -128,7 +134,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
         vPlayDir = new Vector3(transform.forward.x,0,transform.forward.z);
         vPlayDir = vPlayDir.normalized;
 
-        for (int i = 0; i < 5; i++)
+
+        for (int i = 0; i < vNooBasket; i++)
         {
             if (vDis[i] < vDis[close])
 
@@ -138,7 +145,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
             //Highlight closest
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < vNooBasket; i++)
 
         { 
             if (i == close)

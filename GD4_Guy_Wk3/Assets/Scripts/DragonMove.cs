@@ -82,7 +82,7 @@ public class DragonMove : MonoBehaviour
         {
 
             transform.Translate(Vector3.up * Time.deltaTime * vDragonMoveSpeedUp);
-
+            gameObject.GetComponent<AudioSource>().volume =0;
 
         }
 

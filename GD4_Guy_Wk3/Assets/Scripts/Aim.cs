@@ -7,7 +7,9 @@ public class Aim : MonoBehaviour
     public float vMouseSpeed = 10f;
     public float vTiltLimit = 45f;
     public float vAngleLimit = 15f;
+    public float vTiltLowLimit = 5f;
     public float vEulerTol = 1f;
+    public float vAngleLimitLow = 1f;
 
     public Vector3 vCamEuler;
 
@@ -60,10 +62,10 @@ public class Aim : MonoBehaviour
         }
 
 
-        if (transform.eulerAngles.x > (vAngleLimit) && transform.eulerAngles.x < 180)
+        if (transform.eulerAngles.x > (vAngleLimitLow) && transform.eulerAngles.x < 180)
         {
 
-            transform.eulerAngles = new Vector3((vAngleLimit), transform.eulerAngles.y, 0);
+            transform.eulerAngles = new Vector3((vAngleLimitLow), transform.eulerAngles.y, 0);
 
         }
 

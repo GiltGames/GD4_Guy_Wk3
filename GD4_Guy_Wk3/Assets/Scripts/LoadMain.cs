@@ -4,13 +4,16 @@ using UnityEngine.SceneManagement;
 public class LoadMain : MonoBehaviour
 {
     public int Levelchoice;
-    
-    
-    
+    public int LevelApplied;
+    public Levelset Levelset;
+
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Levelchoice= 1;
+        
         
     }
 
@@ -23,11 +26,13 @@ public class LoadMain : MonoBehaviour
     }
 
 
-  public void StartG(int Level)
+  public void StartG()
 
     {
+        Levelset.LevelID = Levelchoice;
+        LevelApplied = Levelchoice;
 
-        SceneManager.LoadScene(Level);
+       // SceneManager.LoadScene(1);
 
 
     }
